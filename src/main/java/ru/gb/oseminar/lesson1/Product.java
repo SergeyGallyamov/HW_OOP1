@@ -1,4 +1,4 @@
-package ru.gb.oseminar;
+package ru.gb.oseminar.lesson1;
 
 public abstract class Product {
     private String name;

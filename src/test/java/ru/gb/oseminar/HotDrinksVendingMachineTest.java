@@ -3,6 +3,9 @@ package ru.gb.oseminar;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.gb.oseminar.lesson1.HotDrinks;
+import ru.gb.oseminar.lesson1.HotDrinksVendingMachine;
+import ru.gb.oseminar.lesson1.Product;
 
 import java.util.ArrayList;
 import java.util.List;

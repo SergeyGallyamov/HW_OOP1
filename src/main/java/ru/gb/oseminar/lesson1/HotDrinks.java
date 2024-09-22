@@ -1,4 +1,4 @@
-package ru.gb.oseminar;
+package ru.gb.oseminar.lesson1;
 
 public class HotDrinks extends Product {
     private int temp;
