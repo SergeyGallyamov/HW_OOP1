@@ -24,7 +24,7 @@ public class StudentController implements UserController<Student>{
 
     public void createStudentGroup(Teacher teacher, List<Student> students){
         studentGroupService.createStudentGroup(teacher, students);
-        studentView.sendOnConsoleUserGroup(studentGroupService.getStudentGroup());
+        studentView.sendOnConsoleUserGroup(studentGroupService.getStudentGroupList());
     }
 
     public void getStudentInStudentGroup(String firstName, String secondName){

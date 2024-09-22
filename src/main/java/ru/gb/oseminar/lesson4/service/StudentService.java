@@ -31,4 +31,24 @@ public class StudentService implements UserService<Student> {
         Student student = new Student(firstName, secondName, patronymic, dateOfBirth, countMaxId);
         students.add(student);
     }
+
+    @Override
+    public Student findById(Long userId) {
+        Student result = null;
+        for (Student student : students){
+            if (student.getStudentId().equals(userId)){
+                result = student;
+                break;
+            }
+        }
+        return result;
+    }
+
+    public List<Student> findByIds(List<Long> studentIds) {
+        List<Student> result = new ArrayList<>();
+        for (Long id : studentIds){
+            result.add(findById(id));
+        }
+        return result;
+    }
 }
