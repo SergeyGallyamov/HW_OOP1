@@ -24,7 +24,7 @@ public class StudentController implements UserController<Student>{
 
     public void createStudentGroup(Teacher teacher, List<Student> students){
         studentGroupService.createStudentGroup(teacher, students);
-        studentView.sendOnConsoleUserGroup(studentGroupService.getStudentGroup());
+        studentView.sendOnConsoleUserGroup(studentGroupService.getStudentGroupList());
     }
 
     public void getStudentInStudentGroup(String firstName, String secondName){
@@ -32,13 +32,13 @@ public class StudentController implements UserController<Student>{
         studentView.sendOnConsole(Collections.singletonList(student));
     }
 
-    public void getSortedListStudentFromStudentGroup(){
-        List<Student> students = studentGroupService.getSortedStudentGroup();
+    public void getSortedListStudentFromStudentGroup(Long groupId){
+        List<Student> students = studentGroupService.getSortedStudentGroup(groupId);
         studentView.sendOnConsole(students);
     }
 
-    public void getSortedListByFIOStudentFromStudentGroup(){
-        List<Student> students = studentGroupService.getSortedByFIOStudentGroup();
+    public void getSortedListByFIOStudentFromStudentGroup(Long groupId){
+        List<Student> students = studentGroupService.getSortedByFIOStudentGroup(groupId);
         studentView.sendOnConsole(students);
     }
 }

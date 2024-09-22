@@ -5,9 +5,16 @@ import java.util.List;
 public class StudentGroup implements Iterable<Student>{
     private List<Student> students;
     private Teacher teacher;
+    private Long groupId;
 
     public StudentGroup(Teacher teacher, List<Student> students) {
         this.students = students;
+        this.teacher = teacher;
+    }
+
+    public StudentGroup(Long groupId, Teacher teacher, List<Student> students) {
+        this.students = students;
+        this.groupId = groupId;
         this.teacher = teacher;
     }
 
@@ -25,6 +32,14 @@ public class StudentGroup implements Iterable<Student>{
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 
     @Override

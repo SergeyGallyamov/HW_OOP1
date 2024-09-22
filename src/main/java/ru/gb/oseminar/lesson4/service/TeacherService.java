@@ -22,8 +22,8 @@ public class TeacherService implements UserService<Teacher> {
     @Override
     public void create(String firstName, String secondName, String patronymic, LocalDate dateOfBirth) {
         Long countMaxId = 0L;
-        for (Teacher teacherInList : teacherList){
-            if(teacherInList.getTeacherId() > countMaxId){
+        for (Teacher teacherInList : teacherList) {
+            if (teacherInList.getTeacherId() > countMaxId) {
                 countMaxId = teacherInList.getTeacherId();
             }
         }
@@ -32,9 +32,21 @@ public class TeacherService implements UserService<Teacher> {
         teacherList.add(teacher);
     }
 
+    @Override
+    public Teacher findById(Long userId) {
+        Teacher result = null;
+        for (Teacher teacher : teacherList) {
+            if (userId.equals(teacher.getTeacherId())) {
+                result = teacher;
+                break;
+            }
+        }
+        return result;
+    }
+
     public void update(Long teacherId, User updatedTeacher) {
-        for (Teacher teacher : teacherList){
-            if (teacherId.equals(teacher.getTeacherId())){
+        for (Teacher teacher : teacherList) {
+            if (teacherId.equals(teacher.getTeacherId())) {
                 teacher.setFirstName(updatedTeacher.getFirstName());
                 teacher.setSecondName(updatedTeacher.getSecondName());
                 teacher.setPatronymic(updatedTeacher.getPatronymic());

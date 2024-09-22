@@ -11,45 +11,74 @@ import java.util.Iterator;
 import java.util.List;
 
 public class StudentGroupService {
-    private StudentGroup studentGroup;
+    private final List<StudentGroup> studentGroupList;
 
-    public void createStudentGroup(Teacher teacher, List<Student> students) {
-        this.studentGroup = new StudentGroup(teacher, students);
+    public StudentGroupService() {
+        this.studentGroupList = new ArrayList<>();
     }
 
-    public StudentGroup getStudentGroup() {
+    public StudentGroup createStudentGroup(Teacher teacher, List<Student> students) {
+        Long maxGroupId = 0L;
+        for (StudentGroup studentGroup : studentGroupList){
+            if (studentGroup.getGroupId() > maxGroupId){
+                maxGroupId = studentGroup.getGroupId();
+            }
+        }
+        maxGroupId++;
+
+        StudentGroup studentGroup = new StudentGroup(maxGroupId, teacher, students);
+        studentGroupList.add(studentGroup);
         return studentGroup;
     }
 
+    public List<StudentGroup> getStudentGroupList() {
+        return studentGroupList;
+    }
+
     public Student getStudentFromStudentGroup(String firstName, String secondName){
-        Iterator<Student> iterator = studentGroup.iterator();
         List<Student> result = new ArrayList<>();
-        while (iterator.hasNext()){
-            Student student = iterator.next();
-            if(student.getFirstName().equalsIgnoreCase(firstName)
-               && student.getSecondName().equalsIgnoreCase(secondName)){
-                result.add(student);
+
+        for(StudentGroup studentGroup : studentGroupList) {
+            Iterator<Student> iterator = studentGroup.iterator();
+            while (iterator.hasNext()) {
+                Student student = iterator.next();
+                if (student.getFirstName().equalsIgnoreCase(firstName)
+                        && student.getSecondName().equalsIgnoreCase(secondName)) {
+                    result.add(student);
+                }
             }
-        }
-        if(result.size() == 0){
-            throw new IllegalStateException(
-                    String.format("Студент с именем %s и фамилией %s не найден", firstName, secondName)
-            );
-        }
-        if(result.size() != 1){
-            throw new IllegalStateException("Найдено более одного студента с указанными именем и фамилией");
+            if (result.size() == 0) {
+                throw new IllegalStateException(
+                        String.format("Студент с именем %s и фамилией %s не найден", firstName, secondName)
+                );
+            }
+            if (result.size() != 1) {
+                throw new IllegalStateException("Найдено более одного студента с указанными именем и фамилией");
+            }
         }
         return result.get(0);
     }
 
-    public List<Student> getSortedStudentGroup(){
-        List<Student> students = new ArrayList<>(studentGroup.getStudents());
+    public List<Student> getSortedStudentGroup(Long groupId) {
+        List<Student> students = new ArrayList<>();
+        for (StudentGroup studentGroup : studentGroupList) {
+           if(groupId.equals(studentGroup.getGroupId())){
+               students.addAll(studentGroup.getStudents());
+               break;
+           }
+        }
         Collections.sort(students);
         return students;
     }
 
-    public List<Student> getSortedByFIOStudentGroup(){
-        List<Student> students = new ArrayList<>(studentGroup.getStudents());
+    public List<Student> getSortedByFIOStudentGroup(Long groupId){
+        List<Student> students = new ArrayList<>();
+        for (StudentGroup studentGroup : studentGroupList) {
+            if(groupId.equals(studentGroup.getGroupId())){
+                students.addAll(studentGroup.getStudents());
+                break;
+            }
+        }
         students.sort(new UserComparator<Student>());
         return students;
     }
