@@ -17,8 +17,9 @@ public class StudentView implements UserView<Student>{
         }
     }
 
-    public void sendOnConsoleUserGroup(StudentGroup studentGroup){
-        logger.info(studentGroup.toString());
+    public void sendOnConsoleUserGroup(List<StudentGroup> studentGroupList) {
+        for (StudentGroup studentGroup : studentGroupList) {
+            logger.info(studentGroup.toString());
+        }
     }
-
 }
