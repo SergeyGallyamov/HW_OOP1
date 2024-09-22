@@ -1,9 +1,11 @@
 package ru.gb.oseminar.lesson3.controller;
 
+import ru.gb.oseminar.lesson3.data.Stream;
 import ru.gb.oseminar.lesson3.data.Student;
 import ru.gb.oseminar.lesson3.data.Teacher;
 import ru.gb.oseminar.lesson3.data.User;
 import ru.gb.oseminar.lesson3.service.DataService;
+import ru.gb.oseminar.lesson3.service.StreamService;
 import ru.gb.oseminar.lesson3.service.StudentGroupService;
 import ru.gb.oseminar.lesson3.view.UserView;
 
@@ -14,6 +16,7 @@ public class UserController {
 
     private final DataService dataService = new DataService();
     private final StudentGroupService studentGroupService = new StudentGroupService();
+    private final StreamService streamService = new StreamService();
     private final UserView userView = new UserView();
 
 
@@ -27,6 +30,10 @@ public class UserController {
         studentGroupService.createStudentGroup(teacher, students);
     }
 
+    public void createStreams(List<Stream> streamList){
+        streamService.createStreams(streamList);
+    }
+
     public Student getStudentInStudentGroup(String firstName, String secondName){
         return studentGroupService.getStudentFromStudentGroup(firstName, secondName);
     }
@@ -38,6 +45,10 @@ public class UserController {
 
     public List<Student> getSortedListByFIOStudentFromStudentGroup(){
         return studentGroupService.getSortedByFIOStudentGroup();
+    }
+
+    public List<Stream> getSortedListByStudentGroupSize(){
+        return streamService.getSortedByStudentGroupSize();
     }
 
 }
